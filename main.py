@@ -41,7 +41,8 @@ def check_valid():
     if not pass_error and not vpass_error and not email_error and not uname_error:
         # If no errors, send user to the welcome page, passing the username
         #return render_template('welcome.html', username=username_escaped)
-        return redirect("/welcome")
+        #return redirect("/welcome",username=cgi.escape(request.form['username']))
+        return redirect("/welcome?username=" + new_username)
 
     else:
         return render_template('form.html', email_error=email_error,
@@ -49,14 +50,14 @@ def check_valid():
             vpass_error=vpass_error,
             pass_error=pass_error)
 
-    return render_template('form.html',new_username=new_username)        
+    return render_template('form.html')        
 
-@app.route("/welcome", methods=['POST','GET'])
+@app.route("/welcome")
 def welcome_user():
     # 'escape' the user's input so that if they typed HTML, it doesn't mess up our site
-    #new_username = request.form['username']
-    #username_escaped = cgi.escape(new_username, quote=True)
-    return render_template('welcome.html')
+    #username=cgi.escape(request.form['username'], quote=True)
+    username = request.args.get("username")
+    return render_template('welcome.html',username=username and cgi.escape(username, quote=True))
 
 @app.route("/")
 def index():
