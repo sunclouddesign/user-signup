@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2></h2>
+
+<form action="/" method='POST'>
+    <label id="uname">Username</label>
+    <input type="text" name="username" id="uname" value="{{ request.form['username'] }}" />
+    <span class="error">{{uname_error}}</span>
+    <br>
+    <label id="pass">Password</label>
+    <input type="text" name="password" id="pass" />
+    <span class="error">{{pass_error}}</span>
+    <br>
+    <label id="vpass">Verify Password</label>
+    <input type="text" name="vpassword" id="vpass" type="password" />
+    <span class="error">{{vpass_error}}</span>
+    <br>
+    <label id="email">Email (optional)</label>
+    <input type="text" name="email" id="email" value="{{ request.form['email'] }}" />
+    <span class="error">{{email_error}}</span>
+    <br>
+    <input type="submit" value="Submit"/>
+</form>
+
+<!---
+{% if error %}
+  <p class='error'>{{ error }}</p>
+{% endif %}
+-->
+{% endblock %}
