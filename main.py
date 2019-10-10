@@ -34,9 +34,10 @@ def check_valid():
         vpass_error = "Please verify password by entering password again."
         #return redirect("/?error=" + error)
 
-    if '@' not in new_email or '.' not in new_email or len(new_email) < 3 or len(new_email) > 20:
-        email_error = "Not a valid email"
-        #return redirect("/?error=" + error)
+    if (new_email):
+        if '@' not in new_email or '.' not in new_email or len(new_email) < 3 or len(new_email) > 20:
+            email_error = "Not a valid email"
+            #return redirect("/?error=" + error)
 
     if not pass_error and not vpass_error and not email_error and not uname_error:
         # If no errors, send user to the welcome page, passing the username
@@ -50,7 +51,7 @@ def check_valid():
             vpass_error=vpass_error,
             pass_error=pass_error)
 
-    return render_template('form.html')        
+    #return render_template('form.html')        
 
 @app.route("/welcome")
 def welcome_user():
